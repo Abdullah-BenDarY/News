@@ -11,7 +11,7 @@ class LatestNewsDataSourceImpl @Inject constructor
 
     //TODO (pass the data from api to domain)
     override suspend fun getLatestNews(country: String): List<LNews>? {
-        val response = apiService.getLatestNews(country)
+        val response = apiService.getLatestNews(country = country)
         return response.articles?.map {
             it?.toLNews() ?: LNews()
         }

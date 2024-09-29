@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="25dp">
+    app:cardCornerRadius="25dp"
+    android:layout_margin="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -44,10 +45,13 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:maxLines="1"
+            android:maxLength="30"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="@id/tv_by"
             app:layout_constraintStart_toEndOf="@id/tv_by"
             app:layout_constraintTop_toTopOf="@id/tv_by"
-            tools:text="Abdullah Bendary" />
+            tools:text="Abdullah Befkjldfhgdkljgkldjlkdjgfkljndary" />
 
         <TextView
             android:id="@+id/tv_title"
