@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.example.domain.models.LNews
+import com.example.news.adapters.AdapterLatestNews
 import com.example.news.base.BaseFragment
 import com.example.news.databinding.FragmentHomeBinding
 import com.example.news.utils.COUNTRY
@@ -12,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
-
+    private val adapterLatestNews = AdapterLatestNews()
     private val _viewModel : HomeViewModel by viewModels ()
 
     override fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?
@@ -30,10 +32,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private fun observe() {
-        _viewModel.lNews.observe(viewLifecycleOwner){
-            it?.let {
+        _viewModel.lNews.observe(viewLifecycleOwner){latestNews ->
+            latestNews?.let {
+                initViews(it)
             }
         }
+    }
+
+    private fun initViews(lNews: List<LNews>) {
+        adapterLatestNews.lNewsList = lNews
+        binding.rvLatestNews.adapter = adapterLatestNews
+        adapterLatestNews.notifyDataSetChanged()
+        adapterLatestNews.onItemClickListener?.onItemClick(lNews[0],0)
+
     }
 
 
