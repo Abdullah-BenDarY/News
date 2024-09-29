@@ -5,25 +5,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.news.R
 import com.example.news.base.BaseFragment
-import com.example.news.base.BaseViewModel
-import com.example.news.databinding.FragmentFavorietsBinding
 import com.example.news.databinding.FragmentHomeBinding
+import com.example.news.utils.COUNTRY
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding, BaseViewModel>() {
-    override fun inflateBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
+
+    private val _viewModel : HomeViewModel by viewModels ()
+
+    override fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?
     )
             = FragmentHomeBinding.inflate(inflater,container,false)
 
-    private val _viewModel : BaseViewModel by viewModels ()
-
-    override fun initViewModel(): BaseViewModel {
+    override fun initViewModel(): HomeViewModel {
         return _viewModel
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _viewModel.getLatestNews(COUNTRY)
+        observe()
+    }
+
+    private fun observe() {
+        _viewModel.lNews.observe(viewLifecycleOwner){
+            it?.let {
+            }
+        }
+    }
+
 
 }
