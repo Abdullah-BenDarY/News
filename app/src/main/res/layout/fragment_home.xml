@@ -1,10 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HomeFragment"
-    android:background="@drawable/iv_main_background">
+    tools:context=".ui.home.HomeFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginTop="14dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_latest_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/latest_news"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/newyork_semi"
+        android:textColor="@color/black"
+        android:gravity="center"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_see_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tv_latest_news"
+        app:layout_constraintBottom_toBottomOf="@id/tv_latest_news"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/see_all"
+        android:fontFamily="@font/nunito_bold"
+        android:textColor="@color/secondry_blue"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:drawablePadding="14dp"
+        android:drawableEnd="@drawable/ic_forward"
+        />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/iv_latest_news"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_latest_news"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_latest_news"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
