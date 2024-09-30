@@ -11,19 +11,20 @@ import com.example.news.base.BaseFragment
 import com.example.news.base.BaseViewModel
 import com.example.news.databinding.FragmentFavorietsBinding
 import com.example.news.databinding.FragmentSearchBinding
+import com.example.news.ui.home.FavorietsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FavorietsFragment : BaseFragment<FragmentFavorietsBinding, BaseViewModel>() {
+class FavorietsFragment : BaseFragment<FragmentFavorietsBinding, FavorietsViewModel>() {
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     )
     = FragmentFavorietsBinding.inflate(inflater,container,false)
 
-    private val _viewModel :BaseViewModel by viewModels ()
+    private val _viewModel :FavorietsViewModel by viewModels ()
 
-    override fun initViewModel(): BaseViewModel {
+    override fun initViewModel(): FavorietsViewModel {
         return _viewModel
     }
 
