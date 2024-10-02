@@ -18,10 +18,12 @@ class HomeViewModel @Inject constructor(private val getLatestNewsUseCase: GetLat
     val lNews get() = _lNews as LiveData<List<LNews>?>
 
     fun getLatestNews(country: String) {
+        showLoading()
         try {
             viewModelScope.launch(Dispatchers.IO) {
                 val response = getLatestNewsUseCase.invoke(country)
                 _lNews.postValue(response)
+                hideLoading()
             }
         }catch (e : Exception){
             handleError(e)
