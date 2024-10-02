@@ -78,7 +78,8 @@
             app:layout_constraintTop_toBottomOf="@id/rv_latest_news"
             app:strokeColor="@color/t_black"
             app:strokeWidth="2dp"
-            tools:text="Healthy" />
+            app:icon="@drawable/ic_filter"
+           android:text="@string/filter" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_sub_tabs"
