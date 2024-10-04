@@ -1,4 +1,4 @@
-package com.example.domain.models
+package com.example.news.utils
 
 
 sealed interface ApiResult<T> {
@@ -9,7 +9,4 @@ sealed interface ApiResult<T> {
     data class Failure<T>(
         val throwable: Throwable
     ): ApiResult<T>
-
-    data class Loading<T>(val isLoading:Boolean = true): ApiResult<T>
-
 }

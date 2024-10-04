@@ -84,13 +84,12 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
                 messageId = uiMessage.messageId ?: R.string.somethin_went_wrong,
                 message = uiMessage.message,
                 posBtnTextId = uiMessage.posButtonId ?: R.string.ok,
-                negBtnTextId = uiMessage.posButtonId,
+                negBtnTextId = uiMessage.negButtonId ?: R.string.retry,
                 onPositiveClick = uiMessage.onPosClick,
                 onNegativeClick = uiMessage.onNegClick,
                 isCancelable = uiMessage.isCancelable
             )
         }
-
     }
 
     override fun onDestroyView() {

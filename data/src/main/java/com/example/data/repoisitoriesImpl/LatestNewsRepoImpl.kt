@@ -7,6 +7,6 @@ import javax.inject.Inject
 
 class LatestNewsRepoImpl @Inject constructor(private val latestNewsDataSource: LatestNewsDataSource) : LatestNewsRepo {
     override suspend fun getLatestNews(country : String): List<LNews>? {
-      return latestNewsDataSource.getLatestNews(country)
+        return latestNewsDataSource.getLatestNews(country)
     }
 }

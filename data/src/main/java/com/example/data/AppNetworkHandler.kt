@@ -1,4 +1,4 @@
-package com.example.data.api.interceptor
+package com.example.data
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -9,8 +9,6 @@ import javax.inject.Inject
 
 class AppNetworkHandler @Inject constructor(
     @ApplicationContext private val context: Context) {
-
-
 
     fun isNetworkAvailable():Boolean{
         var isConnected = false

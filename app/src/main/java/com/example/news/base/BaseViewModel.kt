@@ -2,20 +2,18 @@ package com.example.news.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.domain.ApiResult
 import com.example.domain.customExeption.ConnectionError
 import com.example.domain.customExeption.ServerError
-import com.example.domain.models.ApiResult
 import com.example.news.R
 
 
 open class BaseViewModel:ViewModel() {
     val uiMessage = MutableLiveData<UIMessage>()
 
-
     fun handleError(throwable:Throwable,
                     posActionCallBack: (() -> Unit)?=null){
         if(throwable is ServerError){
-
             uiMessage.postValue(UIMessage(
                 showLoading = false,
                 showMessage = true,
@@ -34,13 +32,13 @@ open class BaseViewModel:ViewModel() {
                 R.string.somethin_went_wrong
             }
         }
-        uiMessage.postValue( UIMessage(
+        uiMessage.postValue(UIMessage(
             showLoading = false,
             showMessage = true,
             messageId =  message,
-            posButtonId = R.string.retry,
+            posButtonId = R.string.ok,
             onPosClick = posActionCallBack
-        ))
+                ))
     }
 
     fun hideLoading(){
@@ -57,6 +55,7 @@ open class BaseViewModel:ViewModel() {
             message = message
         ))
     }
+
     fun handleLoading(loading: ApiResult.Loading<*>){
         if(loading.isLoading){
             showLoading(R.string.loading)
