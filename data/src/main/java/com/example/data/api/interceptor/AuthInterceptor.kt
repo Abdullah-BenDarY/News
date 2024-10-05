@@ -5,7 +5,7 @@ import okhttp3.Response
 
 class AuthInterceptor :Interceptor {
 
-    private val API_KEY = "fa507c3940b048d2abd4098a2b72b8c3"
+    private val API_KEY = "1432d9e1909f421886d7e2c874da9da8"
     private val AUTH_HEADER = "authorization"
     override fun intercept(chain: Interceptor.Chain): Response {
         val newBuilder = chain.request().newBuilder()

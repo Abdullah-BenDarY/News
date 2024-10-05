@@ -7,7 +7,7 @@ const val HEALTH_CATEGORY = "health"
 const val GENERAL_CATEGORY = "general"
 const val ENTERTAINMENT_CATEGORY = "entertainment"
 const val BUSINESS_CATEGORY = "business"
-const val COUNTRY = "us"
+const val ABC_NEWS = "abc-news"
 
 
 
