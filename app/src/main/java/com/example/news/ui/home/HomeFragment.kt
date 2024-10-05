@@ -65,6 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         adapterLatestNews.setOnClick {
             showToast(it.title)
         }
+ feat-ui-home
         adapterSource.setOnClick { source ->
             _viewModel.getNewsBySource(source.id.toString())
 
@@ -72,7 +73,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         adapterNews.setOnClick {
             showToast(it.title)
-        }
+        
     }
 
     private fun observe() {
