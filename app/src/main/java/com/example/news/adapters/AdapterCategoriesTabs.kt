@@ -9,17 +9,18 @@ import com.example.news.ModelTabs
 import com.example.news.R
 import com.example.news.databinding.ItemCategoriesBinding
 
-class AdapterCategoriesTabs(private var sourcesList: MutableList<ModelTabs>? = mutableListOf()) :
-    RecyclerView.Adapter<AdapterCategoriesTabs.Holder>() {
+class AdapterCategoriesTabs(private var sourcesList: MutableList<ModelTabs>? = mutableListOf())
+    : RecyclerView.Adapter<AdapterCategoriesTabs.Holder>() {
 
-    var onItemClickListener: OnItemClickListener? = null
     private var selectedPossision = 0
+    private lateinit var onClick: (ModelTabs) -> Unit?
+    fun setOnClick(onClick: (ModelTabs) -> Unit) {
+        this.onClick = onClick}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
             ItemCategoriesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return Holder(binding)
-    }
+        return Holder(binding) }
 
     override fun getItemCount(): Int = sourcesList?.size ?: 0
 
@@ -27,7 +28,8 @@ class AdapterCategoriesTabs(private var sourcesList: MutableList<ModelTabs>? = m
         val category = sourcesList!![position]
         holder.bind(category, position == selectedPossision)
         holder.binding.btnTabs.setOnClickListener {
-            onItemClickListener?.onItemClick(category.title ?: "")
+            onClick.invoke(category)
+
             if (position != selectedPossision) {
                 val previousPossition = selectedPossision
                 selectedPossision = position
@@ -35,6 +37,11 @@ class AdapterCategoriesTabs(private var sourcesList: MutableList<ModelTabs>? = m
                 notifyItemChanged(position)
             }
         }
+    }
+
+    fun submitList(sources: List<ModelTabs>?) {
+        sourcesList = sources?.toMutableList() ?: mutableListOf()
+        notifyDataSetChanged()
     }
 
     inner class Holder(val binding: ItemCategoriesBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -52,14 +59,5 @@ class AdapterCategoriesTabs(private var sourcesList: MutableList<ModelTabs>? = m
             }
             binding.btnTabs.text = tabsList.title
         }
-    }
-
-    fun submitList(sources: List<ModelTabs>?) {
-        sourcesList = sources?.toMutableList() ?: mutableListOf()
-        notifyDataSetChanged()
-    }
-
-    fun interface OnItemClickListener {
-        fun onItemClick(title: String)
     }
 }

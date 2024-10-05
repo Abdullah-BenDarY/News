@@ -52,12 +52,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private fun initClicks() {
-        adapterCategories.onItemClickListener = AdapterCategoriesTabs.OnItemClickListener { title ->
-            _viewModel.getLatestNews(title)
-            _viewModel.getNewsSource(title)
+        adapterCategories.setOnClick { category ->
+            _viewModel.getLatestNews(category.title.toString())
+            _viewModel.getNewsSource(category.title.toString())
         }
-        adapterSource.onItemClickListener = AdapterSourceTabs.OnItemClickListener { title ->
-            showToast(title)
+        adapterLatestNews.setOnClick {
+            showToast(it.title)
+        }
+        adapterSource.setOnClick { source ->
+            showToast(source.name)
         }
     }
 

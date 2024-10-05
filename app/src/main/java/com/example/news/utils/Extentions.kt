@@ -10,10 +10,6 @@ import com.example.news.R
 fun Fragment.showToast (massage : Any?) {
     Toast.makeText(requireContext(), "$massage", Toast.LENGTH_LONG).show()
 }
-
-fun Fragment.showToast (massage : Any?) {
-    Toast.makeText(requireContext(), "$massage", Toast.LENGTH_LONG).show()
-}
 fun Context.showDialog(
     @StringRes messageId: Int? = null,
     message: String? = null,
@@ -40,10 +36,3 @@ fun Context.showDialog(
     builder.setCancelable(isCancelable)
     builder.create().show()
 }
-
-//fun <T> String.fromJson(className: Class<T>): T {
-//    return Gson().fromJson(this, className)
-//}
-
-
-

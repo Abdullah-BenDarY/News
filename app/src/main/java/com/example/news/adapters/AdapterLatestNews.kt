@@ -11,7 +11,9 @@ import com.example.news.databinding.ItemLatestNewsBinding
 class AdapterLatestNews: RecyclerView.Adapter<AdapterLatestNews.Holder>() {
    private var lNewsList: List<LNews>? = null
 
-    var onItemClickListener: OnItemClickListener? = null
+    private lateinit var onClick: (LNews) -> Unit?
+    fun setOnClick(onClick: (LNews) -> Unit) {
+        this.onClick = onClick}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
@@ -26,6 +28,9 @@ class AdapterLatestNews: RecyclerView.Adapter<AdapterLatestNews.Holder>() {
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val data = lNewsList!![position]
         holder.bind(data)
+        holder.binding.root.setOnClickListener {
+            onClick.invoke(data)
+        }
     }
 
 
@@ -40,10 +45,6 @@ class AdapterLatestNews: RecyclerView.Adapter<AdapterLatestNews.Holder>() {
                 .with(binding.root.context)
                 .load(item.urlToImage)
                 .into(binding.ivNewsBg)
-
-            binding.root.setOnClickListener {
-                onItemClickListener?.onItemClick(item, position)
-            }
         }
     }
     fun submitList(sources: List<LNews>?) {
@@ -51,7 +52,4 @@ class AdapterLatestNews: RecyclerView.Adapter<AdapterLatestNews.Holder>() {
         notifyDataSetChanged()
     }
 
-    fun interface OnItemClickListener {
-        fun onItemClick(lNews: LNews?, position: Int)
-    }
 }

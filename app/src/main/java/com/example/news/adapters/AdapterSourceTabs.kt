@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.models.LNews
 import com.example.domain.models.ModelNewsSource
 import com.example.news.R
 import com.example.news.databinding.ItemCategoriesBinding
@@ -12,8 +13,10 @@ import com.example.news.databinding.ItemCategoriesBinding
 class AdapterSourceTabs() : RecyclerView.Adapter<AdapterSourceTabs.Holder>() {
 
    private var sourcesList : List<ModelNewsSource> ? = null
-    var onItemClickListener: OnItemClickListener? = null
     private var selectedPossision = 0
+    private lateinit var onClick: (ModelNewsSource) -> Unit?
+    fun setOnClick(onClick: (ModelNewsSource) -> Unit) {
+        this.onClick = onClick}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
@@ -27,7 +30,7 @@ class AdapterSourceTabs() : RecyclerView.Adapter<AdapterSourceTabs.Holder>() {
         val category = sourcesList!![position]
         holder.bind(category, position == selectedPossision)
         holder.binding.btnTabs.setOnClickListener {
-            onItemClickListener?.onItemClick(category.name ?: "")
+            onClick.invoke(category)
             if (position != selectedPossision) {
                 val previousPossition = selectedPossision
                 selectedPossision = position
@@ -57,9 +60,5 @@ class AdapterSourceTabs() : RecyclerView.Adapter<AdapterSourceTabs.Holder>() {
     fun submitList(sources: List<ModelNewsSource>?) {
         sourcesList = sources
         notifyDataSetChanged()
-    }
-
-    fun interface OnItemClickListener {
-        fun onItemClick(title: String)
     }
 }
