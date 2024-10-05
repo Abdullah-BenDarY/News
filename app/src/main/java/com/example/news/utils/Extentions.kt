@@ -11,6 +11,9 @@ fun Fragment.showToast (massage : Any?) {
     Toast.makeText(requireContext(), "$massage", Toast.LENGTH_LONG).show()
 }
 
+fun Fragment.showToast (massage : Any?) {
+    Toast.makeText(requireContext(), "$massage", Toast.LENGTH_LONG).show()
+}
 fun Context.showDialog(
     @StringRes messageId: Int? = null,
     message: String? = null,

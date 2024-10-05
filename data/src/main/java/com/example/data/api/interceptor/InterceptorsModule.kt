@@ -1,6 +1,7 @@
 package com.example.data.api.interceptor
 
 import android.content.Context
+import com.example.data.AppNetworkHandler
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -20,7 +20,7 @@ class FavorietsViewModel @Inject constructor(private val getFavorietsUseCase: Ge
         try {
             viewModelScope.launch(Dispatchers.IO) {
                 val response = getFavorietsUseCase.invoke(country)
-                _favoriets.postValue(response)
+//                _favoriets.postValue(response)
             }
         }catch (e : Exception){
             handleError(e)
