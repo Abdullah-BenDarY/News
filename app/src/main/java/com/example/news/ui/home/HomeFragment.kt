@@ -8,11 +8,13 @@ import androidx.fragment.app.viewModels
 import com.example.domain.models.LNews
 import com.example.domain.models.ModelNewsSource
 import com.example.news.ModelTabs
-import com.example.news.adapters.AdapterCategoriesTabs
-import com.example.news.adapters.AdapterLatestNews
-import com.example.news.adapters.AdapterSourceTabs
 import com.example.news.base.BaseFragment
 import com.example.news.databinding.FragmentHomeBinding
+import com.example.news.ui.home.adapters.AdapterCategoriesTabs
+import com.example.news.ui.home.adapters.AdapterLatestNews
+import com.example.news.ui.home.adapters.AdapterNews
+import com.example.news.ui.home.adapters.AdapterSourceTabs
+import com.example.news.utils.ABC_NEWS
 import com.example.news.utils.BUSINESS_CATEGORY
 import com.example.news.utils.ENTERTAINMENT_CATEGORY
 import com.example.news.utils.GENERAL_CATEGORY
@@ -28,9 +30,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private val adapterLatestNews = AdapterLatestNews()
     private val adapterCategories = AdapterCategoriesTabs()
     private val adapterSource = AdapterSourceTabs()
-    private val _viewModel : HomeViewModel by viewModels ()
+    private val adapterNews = AdapterNews()
+    private val _viewModel: HomeViewModel by viewModels()
     private val tabsList = mutableListOf<ModelTabs>()
-    private var newsSourceR : String ? =null
+
     override fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -52,26 +55,41 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private fun initClicks() {
-        adapterCategories.onItemClickListener = AdapterCategoriesTabs.OnItemClickListener { title ->
-            _viewModel.getLatestNews(title)
-            _viewModel.getNewsSource(title)
+        binding.tvSeeAll.setOnClickListener {
+            showToast(":)")
         }
-        adapterSource.onItemClickListener = AdapterSourceTabs.OnItemClickListener { title ->
+        adapterCategories.setOnClick { category ->
+            _viewModel.getLatestNews(category.title.toString())
+            _viewModel.getNewsSource(category.title.toString())
         }
+        adapterLatestNews.setOnClick {
+            showToast(it.title)
+        }
+ feat-ui-home
+        adapterSource.setOnClick { source ->
+            _viewModel.getNewsBySource(source.id.toString())
+
+        }
+
+        adapterNews.setOnClick {
+            showToast(it.title)
+        
     }
 
     private fun observe() {
         _viewModel.lNews.observe(viewLifecycleOwner) { latestNews ->
-            latestNews?.let {
-                setLatestNewsAdapter(it)
-            }
+            setLatestNewsAdapter(latestNews)
         }
+
         _viewModel.newsSource.observe(viewLifecycleOwner) { newsSource ->
-            newsSource?.let {
-                setNewsSourceAdapter(it)
-                newsSourceR= it[0].id.toString()
-            }
+            setNewsSourceAdapter(newsSource)
+            _viewModel.getNewsBySource(newsSource!![0].id.toString())
         }
+
+        _viewModel.newsBySource.observe(viewLifecycleOwner) { news ->
+            setNewsAdapter(news)
+        }
+
     }
 
     private fun setupCategoryList() {
@@ -94,5 +112,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private fun setNewsSourceAdapter(newsSource: List<ModelNewsSource>?) {
         adapterSource.submitList(newsSource)
         binding.rvNewsSource.adapter = adapterSource
+    }
+
+    private fun setNewsAdapter(newsSource: List<LNews>?) {
+        adapterNews.submitList(newsSource)
+        binding.rvNews.adapter = adapterNews
     }
 }

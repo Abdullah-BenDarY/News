@@ -4,11 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.domain.customExeption.ConnectionError
 import com.example.domain.customExeption.ServerError
+import com.example.e_commerce_route_c40.base.UIMessage
 import com.example.news.R
 
 
 open class BaseViewModel:ViewModel() {
     val uiMessage = MutableLiveData<UIMessage>()
+
 
 
     fun handleError(throwable:Throwable,
@@ -33,6 +35,7 @@ open class BaseViewModel:ViewModel() {
                 R.string.somethin_went_wrong
             }
         }
+
         uiMessage.postValue( UIMessage(
             showLoading = false,
             showMessage = true,
@@ -41,6 +44,7 @@ open class BaseViewModel:ViewModel() {
             onPosClick = posActionCallBack
         ))
     }
+
 
     fun hideLoading(){
         uiMessage.postValue(

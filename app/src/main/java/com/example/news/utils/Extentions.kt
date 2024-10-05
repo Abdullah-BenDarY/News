@@ -36,10 +36,3 @@ fun Context.showDialog(
     builder.setCancelable(isCancelable)
     builder.create().show()
 }
-
-//fun <T> String.fromJson(className: Class<T>): T {
-//    return Gson().fromJson(this, className)
-//}
-
-
-

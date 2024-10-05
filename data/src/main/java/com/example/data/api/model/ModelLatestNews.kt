@@ -1,9 +1,9 @@
 package com.example.data.api.model
 
-import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.example.domain.models.LNews
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ModelLatestNews(
@@ -61,7 +61,7 @@ data class ArticlesItem(
 		publishedAt = publishedAt,
 		author = author,
 		urlToImage = urlToImage,
-		description = description,
+			description = description,
 		title = title,
 		url = url
 		)

@@ -2,8 +2,10 @@ package com.example.data.dataSource.dataSourcesImpl
 
 import com.example.data.api.WebServices
 import com.example.data.dataSource.dataSourcesContract.NewsDataSource
+import com.example.domain.ApiResult
 import com.example.domain.models.LNews
 import com.example.domain.models.ModelNewsSource
+import executeApi
 import javax.inject.Inject
 
 // contract implementation for news data source
@@ -11,17 +13,30 @@ class NewsDataSourceImpl @Inject constructor
     (private val apiService: WebServices) : NewsDataSource {
 
     //TODO (pass the data from api to domain)
-    override suspend fun getLatestNews(title: String): List<LNews>? {
+    override suspend fun getLatestNews(title: String): ApiResult<List<LNews>?> {
         val response = apiService.getLatestNews(title = title)
-        return response.articles?.map {
-            it?.toLNews() ?: LNews()
+        return executeApi {
+            response.articles?.map {
+                it?.toLNews() ?: LNews()
+            }
         }
     }
 
-    override suspend fun getNewsSource(category: String): List<ModelNewsSource>? {
+    override suspend fun getNewsBySource(source: String): ApiResult<List<LNews>?> {
+        val response = apiService.getNewsBySource(source = source)
+        return executeApi {
+            response.articles?.map {
+                it?.toLNews() ?: LNews()
+            }
+        }
+    }
+
+    override suspend fun getNewsSource(category: String): ApiResult<List<ModelNewsSource>?> {
         val response = apiService.getNewsSources(category)
-        return response.sources?.map {
-            it?.toNewsSource() ?: ModelNewsSource()
+        return executeApi {
+            response.sources?.map {
+                it?.toNewsSource() ?: ModelNewsSource()
+            }
         }
     }
 }

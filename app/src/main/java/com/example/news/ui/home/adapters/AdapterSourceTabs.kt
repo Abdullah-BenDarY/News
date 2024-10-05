@@ -1,19 +1,22 @@
-package com.example.news.adapters
+package com.example.news.ui.home.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.news.ModelTabs
+import com.example.domain.models.LNews
+import com.example.domain.models.ModelNewsSource
 import com.example.news.R
 import com.example.news.databinding.ItemCategoriesBinding
 
-class AdapterCategoriesTabs(private var sourcesList: MutableList<ModelTabs>? = mutableListOf()) :
-    RecyclerView.Adapter<AdapterCategoriesTabs.Holder>() {
+class AdapterSourceTabs() : RecyclerView.Adapter<AdapterSourceTabs.Holder>() {
 
-    var onItemClickListener: OnItemClickListener? = null
+   private var sourcesList : List<ModelNewsSource> ? = null
     private var selectedPossision = 0
+    private lateinit var onClick: (ModelNewsSource) -> Unit?
+    fun setOnClick(onClick: (ModelNewsSource) -> Unit) {
+        this.onClick = onClick}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
@@ -27,7 +30,7 @@ class AdapterCategoriesTabs(private var sourcesList: MutableList<ModelTabs>? = m
         val category = sourcesList!![position]
         holder.bind(category, position == selectedPossision)
         holder.binding.btnTabs.setOnClickListener {
-            onItemClickListener?.onItemClick(category.title ?: "")
+            onClick.invoke(category)
             if (position != selectedPossision) {
                 val previousPossition = selectedPossision
                 selectedPossision = position
@@ -42,7 +45,7 @@ class AdapterCategoriesTabs(private var sourcesList: MutableList<ModelTabs>? = m
         private val white = ContextCompat.getColorStateList(binding.root.context, R.color.white)
         private val black = ContextCompat.getColorStateList(binding.root.context, R.color.black)
 
-        fun bind(tabsList: ModelTabs, isSelected: Boolean) {
+        fun bind(tabsList: ModelNewsSource, isSelected: Boolean) {
             if (isSelected) {
                 binding.btnTabs.setTextColor(white)
                 binding.btnTabs.backgroundTintList = red
@@ -50,16 +53,12 @@ class AdapterCategoriesTabs(private var sourcesList: MutableList<ModelTabs>? = m
                 binding.btnTabs.setTextColor(black)
                 binding.btnTabs.backgroundTintList = white
             }
-            binding.btnTabs.text = tabsList.title
+            binding.btnTabs.text = tabsList.name
         }
     }
 
-    fun submitList(sources: List<ModelTabs>?) {
-        sourcesList = sources?.toMutableList() ?: mutableListOf()
+    fun submitList(sources: List<ModelNewsSource>?) {
+        sourcesList = sources
         notifyDataSetChanged()
-    }
-
-    fun interface OnItemClickListener {
-        fun onItemClick(title: String)
     }
 }
