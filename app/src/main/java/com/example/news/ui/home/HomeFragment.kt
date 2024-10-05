@@ -65,7 +65,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         adapterLatestNews.setOnClick {
             showToast(it.title)
         }
- feat-ui-home
         adapterSource.setOnClick { source ->
             _viewModel.getNewsBySource(source.id.toString())
 
@@ -73,49 +72,50 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         adapterNews.setOnClick {
             showToast(it.title)
-        
+
+        }
     }
 
-    private fun observe() {
-        _viewModel.lNews.observe(viewLifecycleOwner) { latestNews ->
-            setLatestNewsAdapter(latestNews)
+        private fun observe() {
+            _viewModel.lNews.observe(viewLifecycleOwner) { latestNews ->
+                setLatestNewsAdapter(latestNews)
+            }
+
+            _viewModel.newsSource.observe(viewLifecycleOwner) { newsSource ->
+                setNewsSourceAdapter(newsSource)
+                _viewModel.getNewsBySource(newsSource!![0].id.toString())
+            }
+
+            _viewModel.newsBySource.observe(viewLifecycleOwner) { news ->
+                setNewsAdapter(news)
+            }
+
         }
 
-        _viewModel.newsSource.observe(viewLifecycleOwner) { newsSource ->
-            setNewsSourceAdapter(newsSource)
-            _viewModel.getNewsBySource(newsSource!![0].id.toString())
+        private fun setupCategoryList() {
+            tabsList.add(ModelTabs(GENERAL_CATEGORY))
+            tabsList.add(ModelTabs(TECHNOLOGY_CATEGORY))
+            tabsList.add(ModelTabs(SCIENCE_CATEGORY))
+            tabsList.add(ModelTabs(HEALTH_CATEGORY))
+            tabsList.add(ModelTabs(SPORT_CATEGORY))
+            tabsList.add(ModelTabs(ENTERTAINMENT_CATEGORY))
+            tabsList.add(ModelTabs(BUSINESS_CATEGORY))
+            adapterCategories.submitList(tabsList)
+            binding.rvTabs.adapter = adapterCategories
         }
 
-        _viewModel.newsBySource.observe(viewLifecycleOwner) { news ->
-            setNewsAdapter(news)
+        private fun setLatestNewsAdapter(lNews: List<LNews>?) {
+            adapterLatestNews.submitList(lNews)
+            binding.rvLatestNews.adapter = adapterLatestNews
         }
 
-    }
+        private fun setNewsSourceAdapter(newsSource: List<ModelNewsSource>?) {
+            adapterSource.submitList(newsSource)
+            binding.rvNewsSource.adapter = adapterSource
+        }
 
-    private fun setupCategoryList() {
-        tabsList.add(ModelTabs(GENERAL_CATEGORY))
-        tabsList.add(ModelTabs(TECHNOLOGY_CATEGORY))
-        tabsList.add(ModelTabs(SCIENCE_CATEGORY))
-        tabsList.add(ModelTabs(HEALTH_CATEGORY))
-        tabsList.add(ModelTabs(SPORT_CATEGORY))
-        tabsList.add(ModelTabs(ENTERTAINMENT_CATEGORY))
-        tabsList.add(ModelTabs(BUSINESS_CATEGORY))
-        adapterCategories.submitList(tabsList)
-        binding.rvTabs.adapter = adapterCategories
+        private fun setNewsAdapter(newsSource: List<LNews>?) {
+            adapterNews.submitList(newsSource)
+            binding.rvNews.adapter = adapterNews
+        }
     }
-
-    private fun setLatestNewsAdapter(lNews: List<LNews>?) {
-        adapterLatestNews.submitList(lNews)
-        binding.rvLatestNews.adapter = adapterLatestNews
-    }
-
-    private fun setNewsSourceAdapter(newsSource: List<ModelNewsSource>?) {
-        adapterSource.submitList(newsSource)
-        binding.rvNewsSource.adapter = adapterSource
-    }
-
-    private fun setNewsAdapter(newsSource: List<LNews>?) {
-        adapterNews.submitList(newsSource)
-        binding.rvNews.adapter = adapterNews
-    }
-}
