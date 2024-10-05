@@ -57,7 +57,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             _viewModel.getNewsSource(title)
         }
         adapterSource.onItemClickListener = AdapterSourceTabs.OnItemClickListener { title ->
-            showToast(title)
         }
     }
 
