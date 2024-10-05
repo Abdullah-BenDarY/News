@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.domain.customExeption.ConnectionError
 import com.example.domain.customExeption.ServerError
-import com.example.domain.models.ApiResult
 import com.example.news.R
 
 
@@ -57,13 +56,13 @@ open class BaseViewModel:ViewModel() {
             message = message
         ))
     }
-    fun handleLoading(loading: ApiResult.Loading<*>){
-        if(loading.isLoading){
-            showLoading(R.string.loading)
-            return
-        }
-        hideLoading()
-
-    }
+//    fun handleLoading(loading: ApiResult.Loading<*>){
+//        if(loading.isLoading){
+//            showLoading(R.string.loading)
+//            return
+//        }
+//        hideLoading()
+//
+//    }
 
 }

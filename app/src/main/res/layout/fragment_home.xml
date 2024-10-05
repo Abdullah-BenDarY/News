@@ -73,16 +73,16 @@
             android:backgroundTint="@color/primary_red"
             android:fontFamily="@font/nunito_bold"
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@id/rv_sub_tabs"
+            android:text="@string/filter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_latest_news"
             app:strokeColor="@color/t_black"
             app:strokeWidth="2dp"
             app:icon="@drawable/ic_filter"
-           android:text="@string/filter" />
+            app:layout_constraintEnd_toStartOf="@id/rv_news_source" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_sub_tabs"
+            android:id="@+id/rv_news_source"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

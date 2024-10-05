@@ -2,7 +2,6 @@ package com.example.domain.models
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-
 @Parcelize
 data class LNews(
 	val publishedAt: String? = null,

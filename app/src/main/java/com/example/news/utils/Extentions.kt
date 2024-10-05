@@ -1,10 +1,15 @@
 package com.example.news.utils
 
 import android.content.Context
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.example.news.R
 
+fun Fragment.showToast (massage : Any?) {
+    Toast.makeText(requireContext(), "$massage", Toast.LENGTH_LONG).show()
+}
 
 fun Context.showDialog(
     @StringRes messageId: Int? = null,
