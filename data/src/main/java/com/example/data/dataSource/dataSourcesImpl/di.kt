@@ -1,6 +1,6 @@
 package com.example.data.dataSource.dataSourcesImpl
 
-import com.example.data.dataSource.dataSourcesContract.LatestNewsDataSource
+import com.example.data.dataSource.dataSourcesContract.NewsDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,7 +13,7 @@ abstract class DataSourceBind(){
     // to inject the news data source interface
     @Binds
     abstract fun bindDataSource (
-        dataSourceImpl : LatestNewsDataSourceImpl
-    ): LatestNewsDataSource
+        dataSourceImpl : NewsDataSourceImpl
+    ): NewsDataSource
 
 }

@@ -1,39 +1,53 @@
 package com.example.news.ui.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.domain.customExeption.ConnectionError
 import com.example.domain.models.LNews
+import com.example.domain.models.ModelNewsSource
 import com.example.domain.useCases.GetLatestNewsUseCase
+import com.example.domain.useCases.GetNewsSourceUseCase
 import com.example.news.base.BaseViewModel
-import com.example.news.utils.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val getLatestNewsUseCase: GetLatestNewsUseCase) : BaseViewModel() {
+class HomeViewModel @Inject constructor(
+    private val getLatestNewsUseCase: GetLatestNewsUseCase,
+    private val getNewsSourceUseCase: GetNewsSourceUseCase
+) : BaseViewModel() {
 
-    private val _lNews = MutableLiveData<ApiResult<List<LNews>?>>()
+    private val _lNews = MutableLiveData<List<LNews>?>()
     val lNews get() = _lNews
+    private val _newsSource = MutableLiveData<List<ModelNewsSource>?>()
+    val newsSource get() = _newsSource
 
-    fun getLatestNews(country: String) {
+
+    fun getLatestNews(title: String) {
         showLoading()
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = getLatestNewsUseCase.invoke(country)
-                _lNews.postValue(ApiResult.Success(response))
-            } catch (e: ConnectionError) {
-                // Handle IOException (like no internet or cached data not available)
-                _lNews.postValue(ApiResult.Failure(e))
-                handleError(e)
-//                handleError(e)
-            } catch (e: Exception) {
-                // Handle other possible exceptions
-                _lNews.postValue(ApiResult.Failure(e))
-                handleError(e)
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                val response = getLatestNewsUseCase.invoke(title)
+                _lNews.postValue(response)
+                hideLoading()
             }
+        }catch (e : Exception){
+            handleError(e)
+        }
+    }
+
+    fun getNewsSource(category: String) {
+        showLoading()
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                val response = getNewsSourceUseCase.invoke(category)
+                _newsSource.postValue(response)
+                hideLoading()
+            }
+        } catch (e: Exception) {
+            handleError(e)
         }
     }
 }

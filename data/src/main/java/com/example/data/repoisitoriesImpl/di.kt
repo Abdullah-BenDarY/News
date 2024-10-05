@@ -1,6 +1,6 @@
 package com.example.data.repoisitoriesImpl
 
-import com.example.domain.repoisitories.LatestNewsRepo
+import com.example.domain.repoisitories.NewsRepo
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,6 +13,6 @@ abstract class Repostories() {
     // to inject the news repo interface
     @Binds
     abstract fun provideNewsRepo(
-        latestnewsRepoImpl: LatestNewsRepoImpl
-    ): LatestNewsRepo
+        newsRepoImpl: NewsRepoImpl
+    ): NewsRepo
 }

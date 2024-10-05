@@ -7,6 +7,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.news.R
 
+fun Fragment.showToast (massage : Any?) {
+    Toast.makeText(requireContext(), "$massage", Toast.LENGTH_LONG).show()
+}
 
 fun Fragment.showToast (massage : Any?) {
     Toast.makeText(requireContext(), "$massage", Toast.LENGTH_LONG).show()

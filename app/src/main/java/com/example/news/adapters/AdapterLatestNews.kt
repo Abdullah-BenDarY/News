@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.domain.models.LNews
+import com.example.domain.models.ModelNewsSource
 import com.example.news.databinding.ItemLatestNewsBinding
 
 class AdapterLatestNews: RecyclerView.Adapter<AdapterLatestNews.Holder>() {
-    var lNewsList: List<LNews>? = null
+   private var lNewsList: List<LNews>? = null
 
     var onItemClickListener: OnItemClickListener? = null
 
@@ -45,7 +46,10 @@ class AdapterLatestNews: RecyclerView.Adapter<AdapterLatestNews.Holder>() {
             }
         }
     }
-
+    fun submitList(sources: List<LNews>?) {
+        lNewsList = sources
+        notifyDataSetChanged()
+    }
 
     fun interface OnItemClickListener {
         fun onItemClick(lNews: LNews?, position: Int)

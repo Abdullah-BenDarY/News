@@ -1,10 +1,10 @@
 package com.example.domain.useCases
 
-import com.example.domain.repoisitories.LatestNewsRepo
+import com.example.domain.repoisitories.NewsRepo
 import javax.inject.Inject
 
-class GetLatestNewsUseCase @Inject constructor(private val latestNewsRepo: LatestNewsRepo) {
+class GetLatestNewsUseCase @Inject constructor (private val latestNewsRepo: NewsRepo) {
 
-    suspend fun invoke(country: String) = latestNewsRepo.getLatestNews(country)
+    suspend fun invoke(title: String) = latestNewsRepo.getLatestNews(title)
 
 }
