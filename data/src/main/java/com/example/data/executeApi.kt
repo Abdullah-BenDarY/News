@@ -37,7 +37,7 @@ suspend fun <T> executeApi(api: suspend () -> T): ApiResult<T> {
 
             else -> {
                 // Catch any other unexpected exceptions
-                ApiResult.Failure(throw ConnectionError("An unexpected error occurred: ${ex.localizedMessage}"))
+                ApiResult.Failure(throw ServerError("An unexpected error occurred: ${ex.localizedMessage}"))
             }
         }
     }

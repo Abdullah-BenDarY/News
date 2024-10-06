@@ -5,15 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.domain.models.LNews
-import com.example.domain.models.ModelNewsSource
-import com.example.news.databinding.ItemLatestNewsBinding
+
 import com.example.news.databinding.ItemNewsBinding
 
 class AdapterNews: RecyclerView.Adapter<AdapterNews.Holder>() {
    private var lNewsList: List<LNews>? = null
 
-    private lateinit var onClick: (LNews) -> Unit?
-    fun setOnClick(onClick: (LNews) -> Unit) {
+    lateinit var onClick: (LNews) -> Unit?
+     fun setOnClick( onClick: (LNews) -> Unit) {
         this.onClick = onClick}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
