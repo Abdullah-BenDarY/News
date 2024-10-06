@@ -1,14 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.details.DetailsFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:collapsedTitleTextColor="@color/white"
+            app:contentScrim="@color/primary_red"
+            app:collapsedTitleTextAppearance="@style/CustomCollapsingToolbarTitle"
+            app:expandedTitleTextAppearance="@style/CustomCollapsingToolbarTitle"
+            app:expandedTitleTextColor="@color/white"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:maxLines="1"
+            app:titleTextEllipsize="end"
+            tools:title="BBC-News">
+
+            <ImageView
+                android:id="@+id/iv_news"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_collapseMode="pin" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_to_fav"
+        style="@style/CircularShapeOverlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_fav"
+        app:layout_anchor="@id/appBar"
+        app:layout_anchorGravity="bottom|end" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_source"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/ic_outward"
+                android:drawablePadding="4dp"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:drawableTint="@color/secondry_blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.80"
+                tools:text="London" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_source"
+                tools:text="ldjshgdgjkddflhglfjkgfklgjlfldfkdfkljgdfjgldfjgkldfjgk;dfgjdfk;gjdf;llfdkgjdflkgkldfjgkldfjgkldfnmlkvdfnvkjlsbndfkjnbdfk;ljb;dfs
+sdfg'lkdfsnhgk'ljdfsk'lgjf'lgkj'dfg
+dfkgkdfjgk'ldfjgkljdf;lgjd
+dfgjdf
+gjkldfgnjkldfgkldfjgldf
+gsgjdfklgnjkldfgnkldfhgd
+s'gkhdfklgdfkljg
+ldjshgdgjkddflhglfjkgfklgjlfldfkdfkljgdfjgldfjgkldfjgk;dfgjdfk;gjdf;llfdkgjdflkgkldfjgkldfjgkldfnmlkvdfnvkjlsbndfkjnbdfk;ljb;dfs
+sdfg'lkdfsnhgk'ljdfsk'lgjf'lgkj'dfg
+dfkgkdfjgk'ldfjgkljdf;lgjd
+dfgjdf
+gjkldfgnjkldfgkldfjgldf
+gsgjdfklgnjkldfgnkldfhgd
+s'gkhdfklgdfkljg
+ldjshgdgjkddflhglfjkgfklgjlfldfkdfkljgdfjgldfjgkldfjgk;dfgjdfk;gjdf;llfdkgjdflkgkldfjgkldfjgkldfnmlkvdfnvkjlsbndfkjnbdfk;ljb;dfs
+sdfg'lkdfsnhgk'ljdfsk'lgjf'lgkj'dfg
+dfkgkdfjgk'ldfjgkljdf;lgjd
+dfgjdf
+gjkldfgnjkldfgkldfjgldf
+gsgjdfklgnjkldfgnkldfhgd
+s'gkhdfklgdfkljg
+ldjshgdgjkddflhglfjkgfklgjlfldfkdfkljgdfjgldfjgkldfjgk;dfgjdfk;gjdf;llfdkgjdflkgkldfjgkldfjgkldfnmlkvdfnvkjlsbndfkjnbdfk;ljb;dfs
+sdfg'lkdfsnhgk'ljdfsk'lgjf'lgkj'dfg
+dfkgkdfjgk'ldfjgkljdf;lgjd
+dfgjdf
+gjkldfgnjkldfgkldfjgldf
+gsgjdfklgnjkldfgnkldfhgd
+s'gkhdfklgdfkljg
+ldjshgdgjkddflhglfjkgfklgjlfldfkdfkljgdfjgldfjgkldfjgk;dfgjdfk;gjdf;llfdkgjdflkgkldfjgkldfjgkldfnmlkvdfnvkjlsbndfkjnbdfk;ljb;dfs
+sdfg'lkdfsnhgk'ljdfsk'lgjf'lgkj'dfg
+dfkgkdfjgk'ldfjgkljdf;lgjd
+dfgjdf
+gjkldfgnjkldfgkldfjgldf
+gsgjdfklgnjkldfgnkldfhgd
+s'gkhdfklgdfkljg" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
