@@ -23,6 +23,7 @@ import com.example.news.utils.HEALTH_CATEGORY
 import com.example.news.utils.SCIENCE_CATEGORY
 import com.example.news.utils.SPORT_CATEGORY
 import com.example.news.utils.TECHNOLOGY_CATEGORY
+import com.example.news.utils.showBottomNav
 import com.example.news.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,12 +43,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         return _viewModel
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModelCalls()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModelCalls()
         setupCategoryList()
         initClicks()
         observe()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNav()
     }
 
     private fun viewModelCalls() {
@@ -57,14 +67,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     private fun initClicks() {
         binding.tvSeeAll.setOnClickListener {
-            showToast(":)")
         }
         adapterCategories.setOnClick { category ->
             _viewModel.getLatestNews(category.title.toString())
             _viewModel.getNewsSource(category.title.toString())
         }
         adapterLatestNews.setOnClick {
-            showToast(it.title)
             findNavController().navigate(HomeFragmentDirections.actionGlobalToDetailsFragment(it))
         }
         adapterSource.setOnClick { source ->
@@ -73,7 +81,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         }
 
         adapterNews.setOnClick {
-            showToast(it.title)
             findNavController().navigate(HomeFragmentDirections.actionGlobalToDetailsFragment(it))
 
         }

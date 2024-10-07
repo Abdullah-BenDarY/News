@@ -63,7 +63,8 @@ data class ArticlesItem(
 		urlToImage = urlToImage,
 			description = description,
 		title = title,
-		url = url
+		url = url,
+			content = content
 		)
     }
 }
