@@ -1,15 +1,28 @@
 package com.example.news.utils
 
 import android.content.Context
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.example.news.R
 
 fun Fragment.showToast (massage : Any?) {
     Toast.makeText(requireContext(), "$massage", Toast.LENGTH_LONG).show()
 }
+
+fun Fragment.hideBottomNav() {
+    requireActivity().findViewById<CardView>(R.id.cv_btm_nav)
+        .visibility = View.GONE
+}
+
+fun Fragment.showBottomNav() {
+    requireActivity().findViewById<CardView>(R.id.cv_btm_nav)
+        .visibility = View.VISIBLE
+}
+
 fun Context.showDialog(
     @StringRes messageId: Int? = null,
     message: String? = null,

@@ -2,7 +2,6 @@ package com.example.data.api
 
 import com.example.data.api.model.ModelLatestNews
 import com.example.data.api.model.ModelNewsSource
-import com.example.domain.models.LNews
 import retrofit2.http.GET
 import retrofit2.http.Query
 
