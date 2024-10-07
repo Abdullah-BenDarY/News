@@ -5,11 +5,16 @@
     android:id="@+id/nav"
     app:startDestination="@id/homeFragment">
 
+    <action
+        android:id="@+id/action_global_to_detailsFragment"
+        app:destination="@id/detailsFragment" />
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.news.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+    </fragment>
     <fragment
         android:id="@+id/favorietsFragment"
         android:name="com.example.news.ui.favoriets.FavorietsFragment"
@@ -20,4 +25,15 @@
         android:name="com.example.news.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.news.ui.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="NewsDetails"
+            app:argType="com.example.domain.models.LNews"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

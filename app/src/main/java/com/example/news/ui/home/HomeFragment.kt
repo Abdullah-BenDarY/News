@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.domain.models.LNews
 import com.example.domain.models.ModelNewsSource
 import com.example.news.ModelTabs
@@ -64,6 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         }
         adapterLatestNews.setOnClick {
             showToast(it.title)
+            findNavController().navigate(HomeFragmentDirections.actionGlobalToDetailsFragment(it))
         }
         adapterSource.setOnClick { source ->
             _viewModel.getNewsBySource(source.id.toString())
@@ -72,50 +74,51 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         adapterNews.setOnClick {
             showToast(it.title)
+            findNavController().navigate(HomeFragmentDirections.actionGlobalToDetailsFragment(it))
 
         }
     }
 
-        private fun observe() {
-            _viewModel.lNews.observe(viewLifecycleOwner) { latestNews ->
-                setLatestNewsAdapter(latestNews)
-            }
-
-            _viewModel.newsSource.observe(viewLifecycleOwner) { newsSource ->
-                setNewsSourceAdapter(newsSource)
-                _viewModel.getNewsBySource(newsSource!![0].id.toString())
-            }
-
-            _viewModel.newsBySource.observe(viewLifecycleOwner) { news ->
-                setNewsAdapter(news)
-            }
-
+    private fun observe() {
+        _viewModel.lNews.observe(viewLifecycleOwner) { latestNews ->
+            setLatestNewsAdapter(latestNews)
         }
 
-        private fun setupCategoryList() {
-            tabsList.add(ModelTabs(GENERAL_CATEGORY))
-            tabsList.add(ModelTabs(TECHNOLOGY_CATEGORY))
-            tabsList.add(ModelTabs(SCIENCE_CATEGORY))
-            tabsList.add(ModelTabs(HEALTH_CATEGORY))
-            tabsList.add(ModelTabs(SPORT_CATEGORY))
-            tabsList.add(ModelTabs(ENTERTAINMENT_CATEGORY))
-            tabsList.add(ModelTabs(BUSINESS_CATEGORY))
-            adapterCategories.submitList(tabsList)
-            binding.rvTabs.adapter = adapterCategories
+        _viewModel.newsSource.observe(viewLifecycleOwner) { newsSource ->
+            setNewsSourceAdapter(newsSource)
+            _viewModel.getNewsBySource(newsSource!![0].id.toString())
         }
 
-        private fun setLatestNewsAdapter(lNews: List<LNews>?) {
-            adapterLatestNews.submitList(lNews)
-            binding.rvLatestNews.adapter = adapterLatestNews
+        _viewModel.newsBySource.observe(viewLifecycleOwner) { news ->
+            setNewsAdapter(news)
         }
 
-        private fun setNewsSourceAdapter(newsSource: List<ModelNewsSource>?) {
-            adapterSource.submitList(newsSource)
-            binding.rvNewsSource.adapter = adapterSource
-        }
-
-        private fun setNewsAdapter(newsSource: List<LNews>?) {
-            adapterNews.submitList(newsSource)
-            binding.rvNews.adapter = adapterNews
-        }
     }
+
+    private fun setupCategoryList() {
+        tabsList.add(ModelTabs(GENERAL_CATEGORY))
+        tabsList.add(ModelTabs(TECHNOLOGY_CATEGORY))
+        tabsList.add(ModelTabs(SCIENCE_CATEGORY))
+        tabsList.add(ModelTabs(HEALTH_CATEGORY))
+        tabsList.add(ModelTabs(SPORT_CATEGORY))
+        tabsList.add(ModelTabs(ENTERTAINMENT_CATEGORY))
+        tabsList.add(ModelTabs(BUSINESS_CATEGORY))
+        adapterCategories.submitList(tabsList)
+        binding.rvTabs.adapter = adapterCategories
+    }
+
+    private fun setLatestNewsAdapter(lNews: List<LNews>?) {
+        adapterLatestNews.submitList(lNews)
+        binding.rvLatestNews.adapter = adapterLatestNews
+    }
+
+    private fun setNewsSourceAdapter(newsSource: List<ModelNewsSource>?) {
+        adapterSource.submitList(newsSource)
+        binding.rvNewsSource.adapter = adapterSource
+    }
+
+    private fun setNewsAdapter(newsSource: List<LNews>?) {
+        adapterNews.submitList(newsSource)
+        binding.rvNews.adapter = adapterNews
+    }
+}
