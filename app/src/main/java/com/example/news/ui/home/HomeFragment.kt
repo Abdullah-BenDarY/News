@@ -35,6 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private val adapterNews = AdapterNews()
     private val _viewModel: HomeViewModel by viewModels()
     private val tabsList = mutableListOf<ModelTabs>()
+    private var category = GENERAL_CATEGORY
 
     override fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentHomeBinding.inflate(inflater, container, false)
@@ -67,10 +68,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     private fun initClicks() {
         binding.tvSeeAll.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToHotUpdatesFragment2(category))
         }
         adapterCategories.setOnClick { category ->
             _viewModel.getLatestNews(category.title.toString())
             _viewModel.getNewsSource(category.title.toString())
+            this.category = category.title.toString()
         }
         adapterLatestNews.setOnClick {
             findNavController().navigate(HomeFragmentDirections.actionGlobalToDetailsFragment(it))

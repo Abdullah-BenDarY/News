@@ -1,28 +1,30 @@
-package com.example.news.ui.home.adapters
+package com.example.news.ui.hot_updates.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.domain.models.LNews
-import com.example.domain.models.ModelNewsSource
+import com.example.news.ModelTabs
 import com.example.news.R
-import com.example.news.databinding.ItemLatestNewsBinding
+import com.example.news.databinding.ItemHotUpdatesBinding
+import com.example.news.databinding.ItemNewsBinding
 
-class AdapterLatestNews: RecyclerView.Adapter<AdapterLatestNews.Holder>() {
+class AdapterHotUpdates: RecyclerView.Adapter<AdapterHotUpdates.Holder>() {
    private var lNewsList: List<LNews>? = null
 
     private lateinit var onClick: (LNews) -> Unit?
     fun setOnClick(onClick: (LNews) -> Unit) {
         this.onClick = onClick}
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
-            ItemLatestNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemHotUpdatesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
 
-    override fun getItemCount(): Int = lNewsList?.size ?: 0
+    override fun getItemCount(): Int =
+        lNewsList?.size ?: 0
+
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val data = lNewsList!![position]
@@ -32,13 +34,14 @@ class AdapterLatestNews: RecyclerView.Adapter<AdapterLatestNews.Holder>() {
         }
     }
 
-    inner class Holder(val binding: ItemLatestNewsBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    inner class Holder(val binding: ItemHotUpdatesBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: LNews) {
 
             binding.tvAuther.text = item.author
             binding.tvTitle.text = item.title
-            binding.tvDescription.text = item.description
+            binding.tvContent.text = item.content
             Glide
                 .with(binding.root.context)
                 .load(item.urlToImage)

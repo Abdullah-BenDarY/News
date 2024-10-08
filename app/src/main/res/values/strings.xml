@@ -15,4 +15,6 @@
     <string name="loading">Loading</string>
     <string name="filter">Filter</string>
     <string name="semi_colum">:</string>
+    <string name="hot_updates">Hot updates</string>
+    <string name="published_by">Published by</string>
 </resources>

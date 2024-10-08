@@ -52,7 +52,6 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding, BaseViewModel>() {
             data = Uri.parse(url)
         }
         startActivity(intent)
-
     }
 
     private fun setViews(newsDetails: LNews?) {
@@ -65,9 +64,6 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding, BaseViewModel>() {
             tvTitle.text = newsDetails?.title
             tvDescription.text = newsDetails?.description
             tvContent.text = newsDetails?.content
-
         }
     }
-
-
 }
