@@ -18,8 +18,16 @@
         android:name="com.example.news.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_hotUpdatesFragment2"
+            app:destination="@id/hotUpdatesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
+
         android:id="@+id/favorietsFragment"
         android:name="com.example.news.ui.favoriets.FavorietsFragment"
         android:label="fragment_favoriets"
@@ -39,5 +47,15 @@
             app:argType="com.example.domain.models.LNews"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/hotUpdatesFragment"
+        android:name="com.example.news.ui.hot_updates.HotUpdatesFragment"
+        android:label="fragment_hot_updates"
+        tools:layout="@layout/fragment_hot_updates" >
+        <argument
+            android:name="newsSource"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>
