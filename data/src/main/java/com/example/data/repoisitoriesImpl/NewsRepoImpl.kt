@@ -19,4 +19,8 @@ class NewsRepoImpl @Inject constructor(private val newsDataSource: NewsDataSourc
     override suspend fun getNewsSource(category: String): ApiResult<List<ModelNewsSource>?> {
         return newsDataSource.getNewsSource(category)
     }
+
+    override suspend fun getSearchQuery(query: String): ApiResult<List<LNews>?> {
+        return newsDataSource.getSearchQuery(query)
+    }
 }

@@ -39,4 +39,13 @@ class NewsDataSourceImpl @Inject constructor
             }
         }
     }
+
+    override suspend fun getSearchQuery(query: String): ApiResult<List<LNews>?> {
+        val response = apiService.getSearchQuery(query)
+        return executeApi {
+            response.articles?.map {
+                it?.toLNews() ?: LNews()
+            }
+        }
+    }
 }

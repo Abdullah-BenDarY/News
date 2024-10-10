@@ -21,4 +21,9 @@ interface WebServices {
     suspend fun getNewsBySource(
         @Query ("sources") source : String
     ): ModelLatestNews
+
+    @GET("top-headlines")
+    suspend fun getSearchQuery(
+        @Query ("q") q : String
+    ): ModelLatestNews
 }
