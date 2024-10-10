@@ -15,7 +15,6 @@ import com.example.news.ui.home.adapters.AdapterCategoriesTabs
 import com.example.news.ui.home.adapters.AdapterLatestNews
 import com.example.news.ui.home.adapters.AdapterNews
 import com.example.news.ui.home.adapters.AdapterSourceTabs
-import com.example.news.utils.ABC_NEWS
 import com.example.news.utils.BUSINESS_CATEGORY
 import com.example.news.utils.ENTERTAINMENT_CATEGORY
 import com.example.news.utils.GENERAL_CATEGORY
@@ -24,7 +23,6 @@ import com.example.news.utils.SCIENCE_CATEGORY
 import com.example.news.utils.SPORT_CATEGORY
 import com.example.news.utils.TECHNOLOGY_CATEGORY
 import com.example.news.utils.showBottomNav
-import com.example.news.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
