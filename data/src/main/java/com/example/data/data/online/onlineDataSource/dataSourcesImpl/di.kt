@@ -1,5 +1,6 @@
 package com.example.data.data.online.onlineDataSource.dataSourcesImpl
 
+import com.example.data.data.online.onlineDataSource.dataSourcesContract.NewsDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
