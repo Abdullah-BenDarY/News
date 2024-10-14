@@ -1,6 +1,6 @@
 package com.example.data.data.offline.offlineDataSource.offlineDataSourcesImpl
 
-import com.example.data.data.mappers.NewsMapper
+import com.example.data.data.mappers.toData
 import com.example.data.data.offline.MyDao
 import com.example.data.data.offline.offlineDataSource.offlineDataSourcesContract.OfflineNews
 import com.example.domain.ApiResult
@@ -8,9 +8,7 @@ import com.example.domain.models.LNews
 import javax.inject.Inject
 
 class OfflineDataSourceImpl  @Inject constructor
-    (private val myDao: MyDao,
-     private val newsMapper: NewsMapper
-) : OfflineNews {
+    (private val myDao: MyDao) : OfflineNews {
 
     override suspend fun getAlltNews(): ApiResult<List<LNews>?> {
         return try {
@@ -25,7 +23,7 @@ class OfflineDataSourceImpl  @Inject constructor
 
     override suspend fun insertNews(news: LNews): ApiResult<LNews?> {
         return try {
-            myDao.insertNews(newsMapper.toData(news))
+            myDao.insertNews(toData(news))
             ApiResult.Success(news)
         } catch (e: Exception) {
             ApiResult.Failure(throw Exception(e.message ?: "Delete failed"))
@@ -34,7 +32,7 @@ class OfflineDataSourceImpl  @Inject constructor
 
     override suspend fun deleteNews(news: LNews): ApiResult<LNews?> {
         return try {
-            myDao.deleteNews(newsMapper.toData(news))
+            myDao.deleteNews(toData(news))
             ApiResult.Success(news)
         } catch (e: Exception) {
             ApiResult.Failure(throw Exception(e.message ?: "Delete failed"))

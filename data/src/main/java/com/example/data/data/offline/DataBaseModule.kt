@@ -22,4 +22,9 @@ object DataBaseModule {
             .fallbackToDestructiveMigration()
             .build()
     }
+
+    @Provides
+    fun provideMyDao(database: MyDataBase): MyDao {
+        return database.articalesDao()
+    }
 }
