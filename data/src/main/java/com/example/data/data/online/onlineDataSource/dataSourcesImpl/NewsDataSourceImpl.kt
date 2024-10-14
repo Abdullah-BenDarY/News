@@ -1,7 +1,7 @@
-package com.example.data.dataSource.dataSourcesImpl
+package com.example.data.data.online.onlineDataSource.dataSourcesImpl
 
-import com.example.data.api.WebServices
-import com.example.data.dataSource.dataSourcesContract.NewsDataSource
+import com.example.data.data.online.WebServices
+import com.example.data.data.online.onlineDataSource.dataSourcesContract.NewsDataSource
 import com.example.domain.ApiResult
 import com.example.domain.models.LNews
 import com.example.domain.models.ModelNewsSource

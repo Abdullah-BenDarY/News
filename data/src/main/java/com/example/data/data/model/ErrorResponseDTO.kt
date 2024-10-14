@@ -1,9 +1,7 @@
-package com.example.data.api.model
+package com.example.data.data.model
 
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
-import com.example.domain.models.ErrorResponse
-import com.example.domain.models.LNews
 import com.google.gson.annotations.SerializedName
 
 @Parcelize

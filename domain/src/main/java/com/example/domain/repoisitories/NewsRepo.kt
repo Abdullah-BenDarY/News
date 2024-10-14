@@ -13,4 +13,10 @@ interface NewsRepo {
     suspend fun getNewsSource(category : String): ApiResult<List<ModelNewsSource>?>
 
     suspend fun getSearchQuery(query : String): ApiResult<List<LNews>?>
+
+    suspend fun getOfflineNews(): ApiResult<List<LNews>?>
+
+    suspend fun insertNews(news : LNews): ApiResult<LNews?>
+
+    suspend fun deleteNews(news: LNews): ApiResult<LNews?>
 }

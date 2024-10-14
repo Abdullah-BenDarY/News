@@ -1,6 +1,9 @@
-package com.example.data.api.model
+package com.example.data.data.model
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.domain.models.LNews
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
@@ -29,6 +32,7 @@ data class Source(
 ) : Parcelable
 
 @Parcelize
+@Entity
 data class ArticlesItem(
 
 	@field:SerializedName("publishedAt")
@@ -46,6 +50,8 @@ data class ArticlesItem(
 	@field:SerializedName("source")
 	val source: Source? = null,
 
+	@PrimaryKey(autoGenerate = true)
+	@ColumnInfo("id" , index = true)
 	@field:SerializedName("title")
 	val title: String? = null,
 

@@ -1,4 +1,4 @@
-import com.example.data.api.model.ErrorResponseDTO
+import com.example.data.data.model.ErrorResponseDTO
 import com.example.domain.ApiResult
 import com.example.domain.customExeption.ConnectionError
 import com.example.domain.customExeption.ServerError
