@@ -12,4 +12,5 @@ data class LNews(
 	val url: String? = null,
 	val content: String? = null,
 	val source : String? = null,
+	val id:Int ? = null
 ) : Parcelable

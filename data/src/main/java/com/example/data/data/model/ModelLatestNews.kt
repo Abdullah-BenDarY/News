@@ -23,7 +23,6 @@ data class ModelLatestNews(
 
 @Parcelize
 data class Source(
-
 	@field:SerializedName("name")
  	val name: String? = null,
 
@@ -34,43 +33,66 @@ data class Source(
 @Parcelize
 @Entity
 data class ArticlesItem(
-
+	@ColumnInfo
 	@field:SerializedName("publishedAt")
 	val publishedAt: String? = null,
 
+	@ColumnInfo
 	@field:SerializedName("author")
 	val author: String? = null,
 
+	@ColumnInfo
 	@field:SerializedName("urlToImage")
 	val urlToImage: String? = null,
 
+	@ColumnInfo
 	@field:SerializedName("description")
 	val description: String? = null,
 
+	@ColumnInfo
 	@field:SerializedName("source")
 	val source: Source? = null,
 
-	@PrimaryKey(autoGenerate = true)
-	@ColumnInfo("id" , index = true)
+	@ColumnInfo
 	@field:SerializedName("title")
 	val title: String? = null,
 
+	@ColumnInfo
 	@field:SerializedName("url")
 	val url: String? = null,
 
+	@ColumnInfo
 	@field:SerializedName("content")
-	val content: String? = null
+	val content: String? = null,
+
+	@PrimaryKey(autoGenerate = true)
+	@ColumnInfo("id", index = true)
+	val id: Int
 ) : Parcelable {
 
-    fun toLNews(): LNews {
+	fun toLNews(): LNews {
 		return LNews(
-		publishedAt = publishedAt,
-		author = author,
-		urlToImage = urlToImage,
+			publishedAt = publishedAt,
+			author = author,
+			urlToImage = urlToImage,
 			description = description,
-		title = title,
-		url = url,
-			content = content
+			title = title,
+			url = url,
+			content = content,
+			id = id
 		)
-    }
+	}
 }
+//	fun toData(news: LNews): ArticlesItem {
+//		return ArticlesItem(
+//			publishedAt = news.publishedAt,
+//			author = news.author,
+//			urlToImage = news.urlToImage,
+//			description = news.description,
+//			title = news.title,
+//			url = news.url,
+//			content = news.content,
+//			id = news.id?:1
+//		)
+//	}
+
