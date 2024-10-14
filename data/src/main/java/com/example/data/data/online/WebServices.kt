@@ -1,7 +1,7 @@
-package com.example.data.api
+package com.example.data.data.online
 
-import com.example.data.api.model.ModelLatestNews
-import com.example.data.api.model.ModelNewsSource
+import com.example.data.data.model.ModelLatestNews
+import com.example.data.data.model.ModelNewsSource
 import retrofit2.http.GET
 import retrofit2.http.Query
 

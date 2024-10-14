@@ -1,9 +1,7 @@
-package com.example.data.api.interceptor
+package com.example.data.data.online.interceptor
 
-import android.util.Log
 import com.example.data.AppNetworkHandler
 import okhttp3.Interceptor
-import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
 import javax.inject.Inject

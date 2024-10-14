@@ -1,9 +1,9 @@
-package com.example.data.api
+package com.example.data.data.online
 
 import android.util.Log
-import com.example.data.api.interceptor.OkHttpAuthInterceptor
-import com.example.data.api.interceptor.OkHttpCacheInterceptor
-import com.example.data.api.interceptor.OkHttpOfflineCacheInterceptor
+import com.example.data.data.online.interceptor.OkHttpAuthInterceptor
+import com.example.data.data.online.interceptor.OkHttpCacheInterceptor
+import com.example.data.data.online.interceptor.OkHttpOfflineCacheInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

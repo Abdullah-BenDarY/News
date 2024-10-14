@@ -1,4 +1,4 @@
-package com.example.data.api.interceptor
+package com.example.data.data.online.interceptor
 
 import android.content.Context
 import com.example.data.AppNetworkHandler
