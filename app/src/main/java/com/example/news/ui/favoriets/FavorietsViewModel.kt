@@ -17,30 +17,25 @@ import javax.inject.Inject
 class FavorietsViewModel @Inject constructor(private val getFavorietsUseCase: GetOfflineNewsUseCase,
     private val deleteNewsUseCase: DeleteNewsUseCase) : BaseViewModel() {
 
-    private val _favoriets = MutableLiveData<ApiResult<List<LNews>?>>()
+    private val _favoriets = MutableLiveData<List<LNews>?>()
     val favoriets get() = _favoriets
 
-    private val _deleteNews = MutableLiveData<ApiResult<LNews?>>()
-    val deleteNews get() = _deleteNews
-
     fun getFavoriets() {
-        try {
-            viewModelScope.launch(Dispatchers.IO) {
-                val response = getFavorietsUseCase.invoke()
-                _favoriets.postValue(response)
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = getFavorietsUseCase.invoke()
+            when (response) {
+                is ApiResult.Failure -> handleError(response.throwable)
+                is ApiResult.Success -> _favoriets.postValue(response.data)
             }
-        }catch (e : Exception){
-            handleError(e)
         }
     }
 
     fun deleteNews(lNews: LNews) {
         try {
             viewModelScope.launch(Dispatchers.IO) {
-                val response = deleteNewsUseCase.invoke(lNews)
-                _deleteNews.postValue(response)
+                deleteNewsUseCase.invoke(lNews)
             }
-        }catch (e : Exception){
+        } catch (e: Exception) {
             handleError(e)
         }
     }

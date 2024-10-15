@@ -12,7 +12,6 @@ import javax.inject.Inject
 class NewsDataSourceImpl @Inject constructor
     (private val apiService: WebServices) : NewsDataSource {
 
-    //TODO (pass the data from api to domain)
     override suspend fun getLatestNews(title: String): ApiResult<List<LNews>?> {
         val response = apiService.getLatestNews(title = title)
         return executeApi {

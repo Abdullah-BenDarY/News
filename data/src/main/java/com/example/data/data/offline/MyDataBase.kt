@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.data.data.model.ArticlesItem
 
-@Database(entities = [ArticlesItem::class], version = 1, exportSchema = true)
+@Database(entities = [ArticlesItem::class], version = 2, exportSchema = true)
 @TypeConverters(SourceTypeConverter::class)
 abstract class MyDataBase() : RoomDatabase() {
     abstract fun articalesDao(): MyDao

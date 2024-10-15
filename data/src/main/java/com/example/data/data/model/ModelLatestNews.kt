@@ -67,7 +67,10 @@ data class ArticlesItem(
 
 	@PrimaryKey(autoGenerate = true)
 	@ColumnInfo("id", index = true)
-	val id: Int
+	val id: Int,
+
+	@ColumnInfo
+	var isSaved :Boolean = false
 ) : Parcelable {
 
 	fun toLNews(): LNews {
@@ -79,20 +82,9 @@ data class ArticlesItem(
 			title = title,
 			url = url,
 			content = content,
-			id = id
+			id = id,
+			isSaved = isSaved
 		)
 	}
 }
-//	fun toData(news: LNews): ArticlesItem {
-//		return ArticlesItem(
-//			publishedAt = news.publishedAt,
-//			author = news.author,
-//			urlToImage = news.urlToImage,
-//			description = news.description,
-//			title = news.title,
-//			url = news.url,
-//			content = news.content,
-//			id = news.id?:1
-//		)
-//	}
 
