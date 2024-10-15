@@ -1,6 +1,5 @@
-package com.example.news.ui.search.adapters
+package com.example.news.ui.favoriets
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,17 +8,12 @@ import com.example.domain.models.LNews
 import com.example.news.R
 import com.example.news.databinding.ItemNewsBinding
 
-class AdapterSearch: RecyclerView.Adapter<AdapterSearch.Holder>() {
+class AdapterFavorites: RecyclerView.Adapter<AdapterFavorites.Holder>() {
    private var lNewsList: List<LNews>? = null
+
     private lateinit var onClick: (LNews) -> Unit?
-    private lateinit var onLongClick: (LNews) -> Unit?
-
-    fun setOnLingClick(onLongClick: (LNews) -> Unit) {
-        this.onLongClick = onLongClick }
-
     fun setOnClick(onClick: (LNews) -> Unit) {
         this.onClick = onClick}
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
             ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -33,12 +27,6 @@ class AdapterSearch: RecyclerView.Adapter<AdapterSearch.Holder>() {
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val data = lNewsList!![position]
         holder.bind(data)
-
-        holder.binding.root.setOnLongClickListener {
-            onLongClick.invoke(data)
-            true
-        }
-
         holder.binding.root.setOnClickListener {
             onClick.invoke(data)
         }
@@ -59,7 +47,6 @@ class AdapterSearch: RecyclerView.Adapter<AdapterSearch.Holder>() {
                 .into(binding.ivNewsBg)
         }
     }
-    @SuppressLint("NotifyDataSetChanged")
     fun submitList(sources: List<LNews>?) {
         lNewsList = sources
         notifyDataSetChanged()

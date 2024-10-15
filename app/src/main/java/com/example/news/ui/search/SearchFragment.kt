@@ -75,8 +75,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         }
     }
 
+
     private fun initViews(lSearch : List<LNews>?) {
         adapterSearch.submitList(lSearch)
         binding.rvSearch.adapter=adapterSearch
+        if(lSearch!!.isEmpty()){
+            binding.apply {
+                rvSearch.visibility = View.GONE
+                ivPlaceHolder.visibility = View.VISIBLE
+                tvPlaceHolder.visibility = View.VISIBLE
+            }
+        }else binding.apply {
+            rvSearch.visibility = View.VISIBLE
+            ivPlaceHolder.visibility = View.GONE
+            tvPlaceHolder.visibility = View.GONE
+        }
     }
 }

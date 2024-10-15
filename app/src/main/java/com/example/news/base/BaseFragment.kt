@@ -69,7 +69,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
             }
         }
         negText?.let {
-            builder.setPositiveButton(
+            builder.setNegativeButton(
                 negText,
             ) { dialog, i ->
                 dialog.dismiss()
@@ -103,7 +103,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
             }
         }
         negText?.let {
-            builder.setPositiveButton(
+            builder.setNegativeButton(
                 negText,
             ) { dialog, i ->
                 dialog.dismiss()

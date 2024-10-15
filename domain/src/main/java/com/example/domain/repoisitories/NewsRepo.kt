@@ -16,6 +16,8 @@ interface NewsRepo {
 
     suspend fun getOfflineNews(): ApiResult<List<LNews>?>
 
+    suspend fun isNewsSaved(id: Int): Boolean
+
     suspend fun insertNews(news : LNews): ApiResult<LNews?>
 
     suspend fun deleteNews(news: LNews): ApiResult<LNews?>

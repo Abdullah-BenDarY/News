@@ -11,7 +11,8 @@ import com.example.domain.models.LNews
             title = news.title,
             url = news.url,
             content = news.content,
-            id = news.id?:1
+            id = news.id?:1,
+            isSaved = news.isSaved
         )
     }
 

@@ -11,19 +11,23 @@ class OfflineDataSourceImpl  @Inject constructor
     (private val myDao: MyDao) : OfflineNews {
 
     override suspend fun getAlltNews(): ApiResult<List<LNews>?> {
+        val response = myDao.getAlltNews()
         return try {
-            val response = myDao.getAlltNews()
             val newsList = response.map { it.toLNews() }
             ApiResult.Success(newsList)
         } catch (e: Exception) {
-            ApiResult.Failure(throw Exception(e.message ?: "Delete failed"))
+            ApiResult.Failure(throw Exception(e.message ?: "Inserted failed"))
         }
+    }
+
+    override suspend fun isNewsSaved(id: Int): Boolean {
+        return myDao.countNewsById(id) > 0
     }
 
 
     override suspend fun insertNews(news: LNews): ApiResult<LNews?> {
+        myDao.insertNews(toData(news))
         return try {
-            myDao.insertNews(toData(news))
             ApiResult.Success(news)
         } catch (e: Exception) {
             ApiResult.Failure(throw Exception(e.message ?: "Delete failed"))
@@ -31,8 +35,8 @@ class OfflineDataSourceImpl  @Inject constructor
     }
 
     override suspend fun deleteNews(news: LNews): ApiResult<LNews?> {
+        myDao.deleteNews(toData(news))
         return try {
-            myDao.deleteNews(toData(news))
             ApiResult.Success(news)
         } catch (e: Exception) {
             ApiResult.Failure(throw Exception(e.message ?: "Delete failed"))

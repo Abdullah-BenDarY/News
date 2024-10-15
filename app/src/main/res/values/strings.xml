@@ -18,4 +18,9 @@
     <string name="hot_updates">Hot updates</string>
     <string name="published_by">Published by</string>
     <string name="what_are_you_looking_for">What are you looking for?</string>
+    <string name="are_you_sure_to_delete">Are you sure to delete?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="nothing_found">Nothing Found</string>
+    <string name="no_saved_news">No saved news</string>
 </resources>
